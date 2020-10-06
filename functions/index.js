@@ -3,9 +3,25 @@ const apitoken = 'AIzaSyCFvKnfb8saX4yE8m7aLUsmbhKzrnY4eLw';
 
 const{ google } = require('googleapis');
 
-function sortResults(items) {
-   return items.length
-};
+async function allVideos(videoId, nextPageToken = '', depth = 0, filter){
+    console.log("depth:" + depth);
+
+    const response = await google.youtube('v3').commentThreads.list({
+        key: apitoken,
+        part: 'snippet',
+        q:'',
+        textFormat: 'plainText',
+        maxResults: 100,
+        pageToken: nextPageToken
+    })
+
+    if(response.data.items.length >= 100){
+        const returnArr= response.data.items;
+        return returnArr.concat(await allComments(videoId, response.data.nextPageToken, ++depth));
+    }else{
+        return response.data.items;
+    }
+}
 
 async function allComments(videoId, nextPageToken = '', depth = 0){
     console.log("depth:" + depth);
