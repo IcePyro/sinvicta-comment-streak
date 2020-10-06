@@ -1,0 +1,24 @@
+{
+	"users": {
+		CHANNEL_ID: {
+			"channelId": CHANNEL_ID,
+			"currentStreak": INT,
+			"currentUsername": STRING
+		}
+	}
+	"videos":{
+		VIDEO_ID: {
+			"videoId": VIDEO_ID,
+			"currentTitle": STRING,
+			"releaseDate": DATE
+		}
+	}
+	"userVideo": {
+		CHANNEL_ID:{
+			VIDEO_ID: {
+				"commented": BOOL,
+				"timeDifferenceVideoComment": TIME
+			}
+		}
+	}
+}
